@@ -3,8 +3,8 @@ import jwt from "jsonwebtoken";
 import { env } from "../config/env";
 
 // para generar el token para la sesion
-export function generarToken(payload: object) {
-  return jwt.sign(payload, env.JWT_SECRET, { expiresIn: "7d" });
+export function generarToken(datos: object) {
+  return jwt.sign(datos, env.JWT_SECRET, { expiresIn: "7d" });
 }
 // verificar si tiene token
 export function verificarToken(token: string) {
