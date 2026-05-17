@@ -16,6 +16,8 @@ export default class Tablas {
           email VARCHAR(100) UNIQUE NOT NULL,
           password VARCHAR(255) NOT NULL,
           rol VARCHAR(20) NOT NULL DEFAULT 'psicologo',
+          supabase_id VARCHAR(255),
+          suscripcion VARCHAR(20) NOT NULL DEFAULT 'autonomo',
           creado_en TIMESTAMP DEFAULT NOW()
         )
       `;

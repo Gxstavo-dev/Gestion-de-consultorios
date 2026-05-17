@@ -1,4 +1,5 @@
 import { ROLES } from "../constants/roles";
+import { SUSCRIPCION } from "../constants/suscripcion";
 
 export default interface psicologos {
   id: string;
@@ -7,5 +8,6 @@ export default interface psicologos {
   email: string;
   password: string;
   rol: ROLES;
+  suscripcion: SUSCRIPCION;
   creado_en: string;
 }
