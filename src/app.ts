@@ -1,4 +1,5 @@
 import express from "express";
+import cookieParser from "cookie-parser";
 
 import authRoutes from "./modules/auth/auth.routes"; // rutas relacionados con auth
 import pacientesRoutes from "./modules/pacientes/pacientes.routes"; // rutas para los pacientes
@@ -10,6 +11,7 @@ import { verificacion } from "./middlewares/verificarToken";
 
 const app = express();
 app.use(express.json()); // para poder recibir objetos json desde el frontend
+app.use(cookieParser()); // para leer cookies
 
 app.use("/api/auth", authRoutes); // rutas de autenticacion
 app.use("/api/pacientes", verificacion, pacientesRoutes); // rutas de pacientes

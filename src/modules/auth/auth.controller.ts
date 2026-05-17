@@ -36,7 +36,9 @@ export const registro = async (req: Request, res: Response) => {
     res.status(201).json(usuario); // y retornamos el id,nombre,email,rol y fecha de creado
   } catch (error) {
     if (error instanceof Error) {
-      res.status(400).json({ error: error.message });
+      res
+        .status(400)
+        .json({ error: error.message, mensaje: "Ya existe este usuario " });
     } else {
       res.status(500).json({ error: "Error interno del servidor" });
     }
