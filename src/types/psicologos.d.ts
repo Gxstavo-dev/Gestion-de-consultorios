@@ -6,8 +6,8 @@ export default interface psicologos {
   supabaseId?: string;
   nombre: string;
   email: string;
-  password: string;
+  password?: string;
   rol: ROLES;
-  suscripcion: SUSCRIPCION;
+  suscripcion?: SUSCRIPCION;
   creado_en: string;
 }
