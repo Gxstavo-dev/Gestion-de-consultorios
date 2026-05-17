@@ -8,6 +8,7 @@ const ENV = z.object({
   DATABASE_PORT: z.coerce.number(), // puerto de la conexion a la db de supabase
   DATABASE: z.string(), // tipo de base de de datos
   USER_DATABASE: z.string(), // usuario de la base de datos
+  JWT_SECRET: z.string(),
 });
 
 // validar todas las variables de bun.env que fueron registradas en el objeto creado con zod de nuestro esquema ENV
