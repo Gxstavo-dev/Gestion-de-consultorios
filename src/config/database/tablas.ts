@@ -1,9 +1,11 @@
-import sql from "../db";
-
 /* archivo para crear las tablas en la base de datos */
 
 export default class Tablas {
-  private conn = sql;
+  private conn;
+
+  constructor(conn: any) {
+    this.conn = conn;
+  }
 
   async usuarios() {
     try {

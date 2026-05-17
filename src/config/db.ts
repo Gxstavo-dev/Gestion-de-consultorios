@@ -13,7 +13,7 @@ const sql = postgres({
   password: env.DATABASE_PASSWORD,
 });
 
-const tablas = new Tablas();
+const tablas = new Tablas(sql);
 
 // function para crear las tablas apenas se cree la conexion
 async function crearTablas() {
