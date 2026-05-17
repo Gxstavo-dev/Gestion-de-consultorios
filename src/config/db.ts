@@ -1,3 +1,4 @@
+/* archivo para crear el objeto que nos permitira para usar la db y su conexion */
 import postgres from "postgres";
 import { env } from "./env";
 
