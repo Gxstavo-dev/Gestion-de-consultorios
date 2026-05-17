@@ -23,7 +23,6 @@ su consultorio de forma digital, segura y eficiente.
 ![React](https://img.shields.io/badge/React-18-blue)
 ![TypeScript](https://img.shields.io/badge/TypeScript-5.x-blue)
 ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-16-blue)
-![Prisma](https://img.shields.io/badge/Prisma-ORM-white)
 ![Supabase](https://img.shields.io/badge/Supabase-green)
 ![Stripe](https://img.shields.io/badge/Stripe-pagos-purple)
 
