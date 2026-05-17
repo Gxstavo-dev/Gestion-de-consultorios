@@ -3,7 +3,7 @@ import z from "zod";
 
 const ENV = z.object({
   PORT: z.coerce.number().default(3002), // puerto
-  DATABASE_URL: z.string().url(), // url que permite la conexion
+  DATABASE_HOST: z.string(), // url que permite la conexion
   DATABASE_PASSWORD: z.string(), // contraseña de la db
   DATABASE_PORT: z.coerce.number(), // puerto de la conexion a la db de supabase
   DATABASE: z.string(), // tipo de base de de datos
