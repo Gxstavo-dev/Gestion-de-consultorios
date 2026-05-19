@@ -34,7 +34,7 @@ export default class Tablas {
           nombre VARCHAR(100) NOT NULL,
           apellido VARCHAR(100) NOT NULL,
           email VARCHAR(100),
-          telefono VARCHAR(20),
+          telefono VARCHAR(20) NOT NULL,
           fecha_nacimiento DATE,
           motivo_consulta TEXT,
           diagnostico VARCHAR(200),
