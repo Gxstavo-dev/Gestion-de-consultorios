@@ -1,12 +1,20 @@
 import { Router } from "express";
+import {
+  registroPaciente,
+  PacientePorNombre,
+  PacientePorId,
+  pacientes,
+  borrarPaciente,
+  actualizarDatos,
+} from "./pacientes.controller";
 
 const rutasPacientes = Router();
 
-rutasPacientes.post("/"); // registrar a un paciente
-rutasPacientes.get("/"); // obtener a todos los pacientes
-rutasPacientes.get("/:id"); // obtener un paciente por id
-rutasPacientes.get("/buscar"); // buscar un paciente por nombre
-rutasPacientes.put("/:id"); // actualizar datos del paciente
-rutasPacientes.delete("/:id"); // para eliminar al paciente
+rutasPacientes.post("/", registroPaciente); // registrar a un paciente
+rutasPacientes.get("/", pacientes); // obtener a todos los pacientes
+rutasPacientes.get("/buscar", PacientePorNombre); // buscar un paciente por nombre
+rutasPacientes.get("/:id", PacientePorId); // obtener un paciente por id
+rutasPacientes.put("/:id", actualizarDatos); // actualizar datos del paciente
+rutasPacientes.delete("/:id", borrarPaciente); // para eliminar al paciente
 
 export default rutasPacientes;
