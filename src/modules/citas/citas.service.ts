@@ -9,3 +9,17 @@ export async function crearCita(datos: citasPaciente) {
     VALUES(${datos.paciente_id},${datos.fecha},${datos.hora},${datos.duracion_min},${datos.estado},${datos.frecuencia},${datos.notas_previas})
   `;
 }
+
+// funcion para obtener todas las citas
+export async function obtenerCitas(): Promise<citas[]> {
+  return await sql<citas[]>`
+    SELECT * FROM citas
+    `;
+}
+
+// funcion para obtener la cita por id
+export async function obtenerCitaPorId(id: string) {
+  const [cita] = await sql<citas[]>`SELECT * FROM citas WHERE id = ${id}`;
+  if (!cita) throw new Error("No existe esa cita aun");
+  return cita;
+}
