@@ -1,6 +1,11 @@
 import type { Request, Response } from "express";
 import { citasEsquema } from "./citas.schema";
-import { crearCita, obtenerCitaPorId, obtenerCitas } from "./citas.service";
+import {
+  crearCita,
+  obtenerCitaPorId,
+  obtenerCitas,
+  obtenerCitasPorId,
+} from "./citas.service";
 
 // controlador para crear una cita
 // primero validamos los datos con zod, luego llamamos al servicio
@@ -56,6 +61,24 @@ export async function citaPorId(req: Request, res: Response) {
       return res.status(400).json({
         error: error.message,
         mensaje: "Ocurrio un error al encontrar la cita con ese id",
+      });
+    } else {
+      res.status(500).json({ error: "Error interno del servidor" });
+    }
+  }
+}
+
+// controlador para mostrar todas las citas de un usuario por su id
+export async function citasPorIdPaciente(req: Request, res: Response) {
+  try {
+    const id = req.body.paciente_id;
+    const [citas] = await obtenerCitasPorId(id);
+    return res.status(200).json({ citas });
+  } catch (error) {
+    if (error instanceof Error) {
+      return res.status(400).json({
+        error: error.message,
+        mensaje: "Ocurrio un error al encontrar las citas del paciente",
       });
     } else {
       res.status(500).json({ error: "Error interno del servidor" });

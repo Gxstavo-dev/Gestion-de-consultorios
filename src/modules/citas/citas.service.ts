@@ -23,3 +23,13 @@ export async function obtenerCitaPorId(id: string) {
   if (!cita) throw new Error("No existe esa cita aun");
   return cita;
 }
+
+// funcion para obtener las citas por id de un paciente
+export async function obtenerCitasPorId(idPaciente: string): Promise<citas[]> {
+  return await sql<citas[]>`
+    SELECT *
+    FROM citas
+    INNER JOIN pacientes ON citas.paciente_id = pacientes.id
+    WHERE citas.paciente_id = ${idPaciente}
+    `;
+}
