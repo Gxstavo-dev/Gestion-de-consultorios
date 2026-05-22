@@ -1,6 +1,7 @@
 import sql from "../../config/db";
 import type { citasPaciente } from "./citas.schema";
 import type { citas } from "../../types/citas";
+import { ESTADO_CITA } from "../../constants/estados";
 
 // funcion para crear una cita en la base de datos
 export async function crearCita(datos: citasPaciente) {
@@ -32,4 +33,21 @@ export async function obtenerCitasPorId(idPaciente: string): Promise<citas[]> {
     INNER JOIN pacientes ON citas.paciente_id = pacientes.id
     WHERE citas.paciente_id = ${idPaciente}
     `;
+}
+
+export async function actualizarEstadoCita(
+  id: string,
+  estado: citas["estado"], // accedemos al enum del estado que esta en el tipado de citas
+) {
+  if (!Object.values(ESTADO_CITA).includes(estado))
+    throw new Error("Estado invalido");
+
+  const [cita] = await sql<citas[]>`
+    UPDATE citas
+    SET estado = ${estado}
+    WHERE id = ${id}
+    RETURNING *
+    `;
+  if (!cita) throw new Error("Ocurrio un error al actualizar la cita");
+  return cita;
 }

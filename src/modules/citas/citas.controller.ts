@@ -1,6 +1,7 @@
 import type { Request, Response } from "express";
 import { citasEsquema } from "./citas.schema";
 import {
+  actualizarEstadoCita,
   crearCita,
   obtenerCitaPorId,
   obtenerCitas,
@@ -79,6 +80,24 @@ export async function citasPorIdPaciente(req: Request, res: Response) {
       return res.status(400).json({
         error: error.message,
         mensaje: "Ocurrio un error al encontrar las citas del paciente",
+      });
+    } else {
+      res.status(500).json({ error: "Error interno del servidor" });
+    }
+  }
+}
+
+export async function actualizarCita(req: Request, res: Response) {
+  try {
+    const id = req.body.id;
+    const estado = req.body.estado;
+    const cita = await actualizarEstadoCita(id, estado);
+    return res.status(200).json({ cita });
+  } catch (error) {
+    if (error instanceof Error) {
+      return res.status(400).json({
+        error: error.message,
+        mensaje: "Ocurrio un error al intentar actualizar la cita del paciente",
       });
     } else {
       res.status(500).json({ error: "Error interno del servidor" });
