@@ -3,9 +3,11 @@ import { citasEsquema } from "./citas.schema";
 import {
   actualizarEstadoCita,
   crearCita,
+  eliminarCita,
   obtenerCitaPorId,
   obtenerCitas,
   obtenerCitasPorId,
+  reprogramarCita,
 } from "./citas.service";
 
 // controlador para crear una cita
@@ -73,7 +75,7 @@ export async function citaPorId(req: Request, res: Response) {
 export async function citasPorIdPaciente(req: Request, res: Response) {
   try {
     const id = req.body.paciente_id;
-    const [citas] = await obtenerCitasPorId(id);
+    const citas = await obtenerCitasPorId(id);
     return res.status(200).json({ citas });
   } catch (error) {
     if (error instanceof Error) {
@@ -98,6 +100,46 @@ export async function actualizarCita(req: Request, res: Response) {
       return res.status(400).json({
         error: error.message,
         mensaje: "Ocurrio un error al intentar actualizar la cita del paciente",
+      });
+    } else {
+      res.status(500).json({ error: "Error interno del servidor" });
+    }
+  }
+}
+
+export async function reprogramarPorId(req: Request, res: Response) {
+  try {
+    const id = req.body.id;
+    const fecha = req.body.fecha;
+    const cita = await reprogramarCita(id, fecha);
+    const formatearCita = {
+      ...cita,
+      fecha: cita.fecha.toISOString().split("T")[0],
+    };
+    return res.status(200).json({ citaFormateada: formatearCita });
+  } catch (error) {
+    if (error instanceof Error) {
+      return res.status(400).json({
+        error: error.message,
+        mensaje:
+          "Ocurrio un error al intentar reprogramar la cita del paciente",
+      });
+    } else {
+      res.status(500).json({ error: "Error interno del servidor" });
+    }
+  }
+}
+
+export async function eliminarCitadID(req: Request, res: Response) {
+  try {
+    const id = req.body.id;
+    const cita = await eliminarCita(id);
+    return res.status(201).json({ mensaje: "Se elimino con exito" });
+  } catch (error) {
+    if (error instanceof Error) {
+      return res.status(400).json({
+        error: error.message,
+        mensaje: "Ocurrio un error al intentar eliminar la cita",
       });
     } else {
       res.status(500).json({ error: "Error interno del servidor" });

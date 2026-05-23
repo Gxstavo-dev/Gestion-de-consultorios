@@ -5,6 +5,8 @@ import {
   crearCitas,
   citasPorIdPaciente,
   actualizarCita,
+  reprogramarPorId,
+  eliminarCitadID,
 } from "./citas.controller";
 
 const rutasCitas = Router();
@@ -14,7 +16,7 @@ rutasCitas.get("/", citas); // obtener todas las citas
 rutasCitas.get("/paciente", citasPorIdPaciente); // obtener citas de un paciente
 rutasCitas.get("/:id", citaPorId); // obtener cita por ID
 rutasCitas.patch("/:id/estado", actualizarCita); // actualizar estado de la cita
-//rutasCitas.put("/:id"); // reprogramar cita
-//rutasCitas.delete("/:id"); // cancelar cita
+rutasCitas.put("/reprogramar", reprogramarPorId); // reprogramar cita
+rutasCitas.delete("/eliminar", eliminarCitadID); // cancelar cita
 
 export default rutasCitas;

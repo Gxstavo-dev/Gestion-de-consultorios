@@ -51,3 +51,23 @@ export async function actualizarEstadoCita(
   if (!cita) throw new Error("Ocurrio un error al actualizar la cita");
   return cita;
 }
+
+export async function reprogramarCita(id: string, fecha: string) {
+  const [cita] = await sql<citas[]>`
+    UPDATE citas
+    SET fecha = ${fecha}::DATE
+    WHERE id = ${id}
+    RETURNING *
+    `;
+  if (!cita) throw new Error("Ocurrio un error al reprogramar la cita");
+  return cita;
+}
+
+export async function eliminarCita(id: string) {
+  const [cita] = await sql<citas[]>`
+    DELETE FROM citas WHERE id = ${id}
+    RETURNING *
+    `;
+  if (!cita) throw new Error("No existe una cita con ese ID");
+  return cita;
+}
